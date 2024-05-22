@@ -1,59 +1,75 @@
-import React from "react"
-import UserForm from "../UserInput/userinput"
-import Navbar from "../Navbar/navbar"
-import NewsTracker from "../NewsTicker/newsticker"
-import "./dashboard.css"
-import Graph from "../Graph/graph"
-
-
+import React from "react";
+import UserForm from "../UserInput/userinput";
+import Navbar from "../Navbar/navbar";
+import NewsTracker from "../NewsTicker/newsticker";
+import "./dashboard.css";
+import Graph from "../Graph/graph";
+import Papa from 'papaparse';
 
 class Dashboard extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-           stockName:'AMD'
+            stockName: 'AMD',
+            stockData: []
         }
         this.handleStockNameChange = this.handleStockNameChange.bind(this);
     }
 
-    handleStockNameChange =  (stockName) => {
-        this.setState({ stockName });
-        console.log(this.state.stockName)
+    handleStockNameChange = (stockName) => {
+        this.setState({ stockName }, () => {
+            this.fetchStockData(stockName);
+        });
     };
-    
+
+    componentDidMount() {
+        this.fetchStockData(this.state.stockName);
+    }
+
+    fetchStockData = async (stockName) => {
+        try {
+            const response = await fetch('/Stock_Price_Hist.csv');
+            const reader = response.body.getReader();
+            const result = await reader.read();
+            const decoder = new TextDecoder('utf-8');
+            const csvData = decoder.decode(result.value);
+
+            const parsedData = Papa.parse(csvData, { header: true }).data;
+            const stockData = parsedData.filter(row => row.STOCK === stockName);
+
+            this.setState({ stockData });
+        } catch (error) {
+            console.error('Error fetching stock data:', error);
+        }
+    };
 
     render() {
-
         return (
-
             <div>
                 <Navbar />
-                <div style={{ display: 'flex', width: '100%',height:'30rem'}}>
+                <div style={{ display: 'flex', width: '100%', height: '30rem' }}>
                     <div style={{ flex: 1 }}>
                         <UserForm onStockNameChange={this.handleStockNameChange} />
                     </div>
                     <div style={{ flex: 1 }}>
-                        <Graph stockName={this.state.stockName}/>
+                        <Graph stockData={this.state.stockData} stockName={this.state.stockName} />
                     </div>
                 </div>
                 <br></br>
                 <br></br>
                 <br></br>
-                <div style={{width: '100%',backgroundColor:"lightgrey"}}>
-                    <div style={{marginLeft:'3rem',marginRight:'3rem'}}>
-                       <NewsTracker />
+                <div style={{ width: '100%', backgroundColor: "lightgrey" }}>
+                    <div style={{ marginLeft: '3rem', marginRight: '3rem' }}>
+                        <NewsTracker />
                     </div>
                 </div>
                 <br></br>
                 <br></br>
                 <br></br>
                 <div>
-                    
                 </div>
             </div>
-
-        
         )
     }
 
