@@ -1,17 +1,17 @@
 .custom-card {
     max-width: 18rem; /* Adjust the width as needed */
-    padding: 1rem;
+    padding: 0rem;
+    max-height: 5rem;
      /* Center the card horizontally */
 }
 
 .custom-card .card-body {
-    padding: 0.5rem; /* Adjust padding as needed */
+    padding: 0rem; /* Adjust padding as needed */
+    max-height: 5rem;
 }
 
-.custom-card .card-title {
-    font-size: 1rem; /* Adjust font size as needed */
-}
 
 .custom-card .card-text {
     font-size: 1.5rem; /* Adjust font size as needed */
+    max-height: 5rem;
 }

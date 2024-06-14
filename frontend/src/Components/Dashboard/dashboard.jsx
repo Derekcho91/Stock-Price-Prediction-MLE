@@ -50,12 +50,12 @@ class Dashboard extends React.Component {
             <div>
                 <Navbar />
                 
-                <div style={{ backgroundColor:"red", marginTop: "5rem", marginLeft: "5rem"}}>
+                <div style={{ marginTop: "4rem", marginLeft: "5rem"}}>
                     <h4><b>Stock Dashboard for {this.state.stockName}</b></h4>
                     <UserForm onStockNameChange={this.handleStockNameChange} />
                 </div>
 
-                <div style={{backgroundColor:"blue"}}>
+                <div>
                     <Cards />
                 </div>
 

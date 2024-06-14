@@ -16,11 +16,11 @@ class Cards extends React.Component {
 
     render() {
         return (
-            <div className="container mt-5">
+            <div className="container mt-1">
                 <div className="row">
                     {this.state.cardData.map((card, index) => (
                         <div key={index} className="col-md-3">
-                            <div className="card text-center mb-1 custom-card">
+                            <div className="card text-center mb custom-card">
                                 <div className="card-body">
                                     <h5 className="card-title">{card.title}</h5>
                                     <p className="card-text display-4"><b>${card.value}</b></p>
