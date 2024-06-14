@@ -10,11 +10,13 @@ class UserForm extends React.Component {
         super(props);
         this.state = {
             stockName: "",
-            stockPrice: "",
-            confidence: "",
+            defaultStockName:"AMD"
+            // stockPrice: "",
+            // confidence: "",
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
     }
 
@@ -23,7 +25,7 @@ class UserForm extends React.Component {
         e.preventDefault();
 
         const stockName = e.target.elements.stockName.value;
-        console.log(this.props)
+        console.log(stockName)
         this.props.onStockNameChange(stockName)
         //this.props.onStockNameChange(stockName, () => {
         //console.log(this.props.stockName);
@@ -32,19 +34,35 @@ class UserForm extends React.Component {
         // Axios.post("")
         // .then()
         // .catch((err) => {console.log(err)});
+    }   
+
+    handleChange(e) {
+        this.state.stockName = e.target.value;
+        console.log("here")
+        console.log(this.state.stockName)
+        if(this.state.stockName == '')
+            {
+                this.state.stockName=this.state.defaultStockName    
+            }
+        this.props.onStockNameChange(this.state.stockName)
+        //this.handleSubmit(e);
+        // this.setState({ stockName }, () => {
+        //     this.handleSubmit(e);
+        // });
     }
 
     render() {
 
         return (
 
-            <div className="userform">
+            <div className="userform" style={{width:"15%"}}>
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
-                        <legend>Stock Details</legend>
+                        {/* <legend>Stock Details</legend> */}
                         <div className="mb-3">
-                            <label htmlFor="stockName" className="form-label">Stock Name</label>
-                            <select name="stockName" className="form-control" id="stockName" required>
+                            {/* <label htmlFor="stockName" className="form-label">Stock Name</label> */}
+                            <select name="stockName" className="form-control" id="stockName" required onChange={this.handleChange}
+                                value={this.state.stockName}>
                                 <option value="">Select Stock</option>
                                 <option value="AAPL">AAPL</option>
                                 <option value="AMD">AMD</option>
@@ -56,18 +74,16 @@ class UserForm extends React.Component {
                             </select>
                         </div>
 
-                        <div className="mb-3">
+                        {/* <div className="mb-3">
                             <label htmlFor="disabledTextInput" className="form-label">Stock Price</label>
                             <input type="text" name="stockPrice" className="form-control" placeholder="stock price" required />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="disabledTextInput" className="form-label">Confidence</label>
                             <input type="text" name="confidence" className="form-control" placeholder="confidence" required />
+                        </div> */}
 
-
-
-                        </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        {/* <button type="submit" className="btn btn-primary">Submit</button> */}
                     </fieldset>
                 </form>
 

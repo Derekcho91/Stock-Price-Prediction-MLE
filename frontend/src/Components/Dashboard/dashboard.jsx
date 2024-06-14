@@ -5,6 +5,7 @@ import NewsTracker from "../NewsTicker/newsticker";
 import "./dashboard.css";
 import Graph from "../Graph/graph";
 import Papa from 'papaparse';
+import Cards from "../Cards/card";
 
 class Dashboard extends React.Component {
 
@@ -48,31 +49,33 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <Navbar />
-                <div style={{ display: 'flex', width: '100%', height: '30rem' }}>
-                    <div style={{ flex: 1 }}>
-                        <UserForm onStockNameChange={this.handleStockNameChange} />
-                    </div>
-                    <div style={{ flex: 1 }}>
+                
+                <div style={{ backgroundColor:"red", marginTop: "5rem", marginLeft: "5rem"}}>
+                    <h4><b>Stock Dashboard for {this.state.stockName}</b></h4>
+                    <UserForm onStockNameChange={this.handleStockNameChange} />
+                </div>
+
+                <div style={{backgroundColor:"blue"}}>
+                    <Cards />
+                </div>
+
+                <div >
+                    <div style={{width: '100%'}}>
                         <Graph stockData={this.state.stockData} stockName={this.state.stockName} />
                     </div>
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <div style={{ width: '100%', backgroundColor: "lightgrey" }}>
+
+                <div style={{ width: '100%', backgroundColor: "lightgrey"}}>
                     <div style={{ marginLeft: '3rem', marginRight: '3rem' }}>
                         <NewsTracker />
                     </div>
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
+                
                 <div>
                 </div>
             </div>
-        )
+        );
     }
-
 }
 
 export default Dashboard;
