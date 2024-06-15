@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { gapi } from 'gapi-script'; // Ensure gapi-script is imported correctly
 import Login from '../Login-Logout/login';
-import { gapi } from 'gapi-script';
-import Test from './test';
 
 const clientId = '407240196859-30rjkune4eqd19mgv8rnok2eqh16ug16.apps.googleusercontent.com';
 
 class Test1 extends Component {
   componentDidMount() {
-    console.log("here");
-
-    function start() {
+    // Load gapi client and initialize
+    gapi.load('client:auth2', () => {
       gapi.client.init({
         clientId: clientId,
-        scope: ""
+        scope: "profile email" // Adjust scope as needed
       });
-    };
-
-    gapi.load('client:auth2', start);
+    });
   }
 
   render() {
@@ -24,8 +21,7 @@ class Test1 extends Component {
       <div>
         <h1>Hello, World!</h1>
         <p>This is a dummy JSX component.</p>
-         <Login/>
-
+        <Login/>
         <ul>
           <li>Item 1</li>
           <li>Item 2</li>

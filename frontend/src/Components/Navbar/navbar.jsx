@@ -10,10 +10,10 @@ class Navbar extends React.Component{
 
             <div>
                 <nav
-                className="navbar navbar-expand-lg navbar-dark fixed-top p-1 mynav"
-                style={{ backgroundColor: "#000000" }}
+                className="navbar navbar-expand-lg navbar-dark p-1 mynav"
+                style={{ backgroundColor: "black", borderColor:"red" }}
                 >
-                <div style={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+                <div style={{ paddingLeft:"2rem",paddingRight:"2rem",width:"100%",display:"flex",justifyContent:"space-between"}}>
                     <h2>
                     StockSentinel
                     </h2>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
-const CLIENT_ID = '407240196859-30rjkune4eqd19mgv8rnok2eqh16ug16.apps.googleusercontent.com';  // Replace with your Google Client ID
+const CLIENT_ID = '407240196859-30rjkune4eqd19mgv8rnok2eqh16ug16.apps.googleusercontent.com';
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -50,6 +50,6 @@ function Login() {
       )}
     </div>
   );
-};
+}
 
 export default Login;

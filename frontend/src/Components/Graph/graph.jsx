@@ -26,57 +26,95 @@ ChartJS.register(
 class Graph extends React.Component {
     constructor(props) {
         super(props);
-        this.data = {
-            labels: [],
-            datasets: [
-                {
-                    label: '',
-                    data: [],
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }
-            ]
+        this.state = {
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: '',
+                        data: [],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }
+                ]
+            }
         };
+
         this.options = {
             scales: {
                 x: {
                     type: 'category',
+                    ticks: {
+                        color: 'white', // Set x-axis label color to white
+                    },
                 },
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'white', // Set y-axis label color to white
+                    },
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Stock Price', // Title text
+                    color: 'white', // Title color
+                    font: {
+                        size: 20, // Title font size
+                    }
+                },
+                tooltip: {
+                    titleColor: 'white', // Tooltip title color
+                    bodyColor: 'white', // Tooltip body text color
+                },
+                legend: {
+                    labels: {
+                        color: 'white', // Legend label color
+                    }
                 }
             }
         };
     }
 
     componentDidUpdate(prevProps) {
-        this.updateChartData(this.props.stockData);
+        if (prevProps.stockData !== this.props.stockData || prevProps.stockName !== this.props.stockName) {
+            this.updateChartData(this.props.stockData, this.props.stockName);
+        }
     }
 
-    updateChartData = (stockData) => {
+    updateChartData = (stockData, stockName) => {
+
+        console.log(stockData);
+
+        if (!stockData || stockData.length === 0) {
+            return;
+        }
+
         const newLabels = stockData.map(item => item.Date);
         const newClose = stockData.map(item => item.Close);
-        const stockName = this.props.stockName;
 
-        this.data = {
-            labels: newLabels,
-            datasets: [
-                {
-                    label: stockName,
-                    data: newClose,
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }
-            ]
-        };
+        this.setState({
+            data: {
+                labels: newLabels,
+                datasets: [
+                    {
+                        label: stockName,
+                        data: newClose,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }
+                ]
+            }
+        });
     };
 
     render() {
         return (
             <div className="graph"> 
-                <Line data={this.data} options={this.options} />
+                <Line data={this.state.data} options={this.options} />
             </div>
         );
     }
