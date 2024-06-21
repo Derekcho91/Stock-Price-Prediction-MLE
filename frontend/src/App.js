@@ -1,9 +1,8 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Dashboard from './Components/Dashboard/dashboard';
-import Login from './Components/Login-Logout/login';
-import Test1 from './Components/Test/test1';
+import LoginPage from './Components/Test/test1'; // Assuming LoginPage is in the 'Test' directory
 
 class App extends React.Component {
   render() {
@@ -12,8 +11,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/test1" element={<Test1 />} />
+            <Route path="/" element={<LoginPage />} /> {/* Default route to LoginPage */}
           </Routes>
         </BrowserRouter>
       </div>

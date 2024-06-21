@@ -102,7 +102,7 @@ class UserForm extends Component {
                                     <option value="AAPL">AAPL</option>
                                     <option value="AMD">AMD</option>
                                     <option value="AMZN">AMZN</option>
-                                    <option value="GOOGL">GOOGL</option>
+                                    <option value="GOOG">GOOG</option>
                                     <option value="META">META</option>
                                     <option value="MSFT">MSFT</option>
                                     <option value="NVDA">NVDA</option>

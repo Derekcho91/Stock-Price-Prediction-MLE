@@ -28,13 +28,20 @@ class Graph extends React.Component {
         super(props);
         this.state = {
             data: {
-                labels: [],
+                labels: [], // Labels for x-axis
                 datasets: [
                     {
                         label: '',
                         data: [],
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    },
+                    {
+                        label: '(Predicted)',
+                        data: [],
+                        fill: false,
+                        borderColor: 'rgb(255, 99, 132)', // Red color for predicted data
                         tension: 0.1
                     }
                 ]
@@ -46,7 +53,8 @@ class Graph extends React.Component {
                 x: {
                     type: 'category',
                     ticks: {
-                        color: 'white', // Set x-axis label color to white
+                        color: 'white',
+                         // Set x-axis label color to white
                     },
                 },
                 y: {
@@ -78,32 +86,55 @@ class Graph extends React.Component {
         };
     }
 
+    componentDidMount() {
+        // Initial update of chart data
+        this.updateChartData(this.props.stockData, this.props.stockName);
+    }
+
     componentDidUpdate(prevProps) {
+        // Check if stockData or stockName props have changed
         if (prevProps.stockData !== this.props.stockData || prevProps.stockName !== this.props.stockName) {
             this.updateChartData(this.props.stockData, this.props.stockName);
         }
     }
 
     updateChartData = (stockData, stockName) => {
-
-        console.log(stockData);
-
         if (!stockData || stockData.length === 0) {
             return;
         }
 
-        const newLabels = stockData.map(item => item.Date);
-        const newClose = stockData.map(item => item.Close);
+        // Separate historical data and predicted data based on "Inference" key
+        const historicalData = stockData.filter(item => item.Inference !== "Y");
+        const predictedData = stockData.filter(item => item.Inference === "Y");
 
+        // Extract labels and data for historical data
+        const historicalLabels = historicalData.map(item => item.Date);
+        const historicalClose = historicalData.map(item => item.Close);
+
+        // Extract labels and data for predicted data
+        const predictedLabels = predictedData.map(item => item.Date);
+        const predictedClose = predictedData.map(item => item.Close);
+
+        // Merge all labels (historical and predicted)
+        const allLabels = [...historicalLabels, ...predictedLabels];
+
+        // Update the dataset
         this.setState({
             data: {
-                labels: newLabels,
+                labels: allLabels,
                 datasets: [
                     {
                         label: stockName,
-                        data: newClose,
+                        data: [...historicalClose, ...Array(predictedLabels.length).fill(null)], // Fill historical data with null for predicted labels
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    },
+                    {
+                        label: `${stockName} (Predicted)`,
+                        data: [...Array(historicalLabels.length).fill(null), ...predictedClose], // Fill predicted data with null for historical labels
+                        fill: false,
+                        borderColor: 'rgb(255, 99, 132)', // Red color for predicted data
                         tension: 0.1
                     }
                 ]
