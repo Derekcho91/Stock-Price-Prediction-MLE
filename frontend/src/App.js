@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Dashboard from './Components/Dashboard/dashboard';
-import LoginPage from './Components/Test/test1'; // Assuming LoginPage is in the 'Test' directory
+import LoginPage from './Components/Login/login'; // Assuming LoginPage is in the 'Test' directory
 
 class App extends React.Component {
   render() {

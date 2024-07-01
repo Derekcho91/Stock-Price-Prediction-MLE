@@ -51,7 +51,7 @@ class LoginPage extends Component {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: 'black' }}>
         <div style={{ backgroundColor: 'black', padding: '2rem', borderRadius: '8px', border: '1px solid white', textAlign: 'center' }}>
-          <h2 style={{ color: 'white' }}>Sign in to StockSentinel</h2>
+          <h2 style={{ color: 'white' }}>Sign in to ORLANDO</h2>
           <br />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <GoogleOAuthProvider clientId={CLIENT_ID}>

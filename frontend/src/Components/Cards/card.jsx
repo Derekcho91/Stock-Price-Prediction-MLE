@@ -17,8 +17,6 @@ class Cards extends React.Component {
 
     componentDidUpdate(prevProps) {
 
-       
-
         if (this.props.open !== prevProps.open ||
             this.props.close !== prevProps.close ||
             this.props.low !== prevProps.low ||

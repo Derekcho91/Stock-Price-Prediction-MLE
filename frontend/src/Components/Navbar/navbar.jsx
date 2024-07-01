@@ -24,7 +24,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg navbar-dark p-1 mynav" style={{ backgroundColor: "black" }}>
         <div className="container-fluid">
           <div className="d-flex justify-content-between align-items-center w-100 px-3">
-            <h2 className="navbar-brand mb-0">StockSentinel</h2>
+            <h2 className="navbar-brand mb-0">ORLANDO</h2>
             
             <div className="d-flex align-items-center">
               <div className="me-3">
