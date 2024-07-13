@@ -1,5 +1,5 @@
 # Machine Learning Engineering Project Work For Stock Price Prediction,
-Hi, This is a School Project my group and I have done for a Machine Learning Engineering Module.
+Hi, This is a School Project my group and I have done for a Machine Learning Engineering Module, I'm not sure if this is considered an MLOps Project.
 
 Generally Speaking, We are using AWS Lambda to start the EC2 instance to perform the webscrape from Yahoo Finance Frontend, And Feeding it thru AWS Sagemaker Endpoint to perform the prediction.
 
